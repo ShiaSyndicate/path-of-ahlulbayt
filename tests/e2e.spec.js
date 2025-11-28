@@ -1,6 +1,4 @@
 const { test, expect } = require('@playwright/test');
-const path = require('path');
-const fs = require('fs');
 
 test.describe('Safety checks', () => {
   test('modal source link is safe and use noopener', async ({ page }) => {

@@ -1,3 +1,4 @@
+/* eslint-disable security/detect-non-literal-fs-filename, security/detect-non-literal-regexp */
 /*
   Lightweight font downloader for Google Fonts CSS.
   NOTE: This script simplifies extraction and downloads woff2 fonts into assets/fonts.

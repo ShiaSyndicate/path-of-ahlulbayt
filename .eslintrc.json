@@ -3,6 +3,18 @@
     "browser": true,
     "es2021": true
   },
+  "overrides": [
+    {
+      "files": ["scripts/**/*.js", "playwright.config.js", "tests/**/*.js"],
+      "env": {
+        "node": true,
+        "es2021": true
+      },
+      "rules": {
+        "no-console": "off"
+      }
+    }
+  ],
   "extends": [
     "eslint:recommended",
     "plugin:security/recommended"
