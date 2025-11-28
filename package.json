@@ -6,10 +6,14 @@
   "scripts": {
     "security:scan": "node ./scripts/security-check.js",
     "lint": "eslint . --ext .js",
+    "lint:ci": "eslint . --ext .js --max-warnings=0",
+    "download-fonts": "node ./scripts/download-fonts.js",
+    "test:e2e": "npx playwright test --config=playwright.config.js",
     "ci": "npm run security:scan && npm run lint"
   },
   "devDependencies": {
     "eslint": "^8.50.0",
-    "eslint-plugin-security": "^1.7.0"
+    "eslint-plugin-security": "^1.7.0",
+    "@playwright/test": "^1.42.1"
   }
 }

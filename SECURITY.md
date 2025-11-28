@@ -12,6 +12,7 @@ If you find a security vulnerability, please email security@your-domain.example 
 - Added Content-Security-Policy and Referrer-Policy meta tags to `index.html` and `timeline.html` as a defense-in-depth control.
 - Removed inline scripts where possible and moved inline styles to `style.css` to allow more restrictive CSP policies.
 - Removed console logs that may cause information leakage in production.
+- Removed console logs that may cause information leakage in production.
 
 ## Recommended deployment configuration
 Set security headers via your hosting provider or reverse proxy:
@@ -25,6 +26,9 @@ X-Frame-Options: DENY
 Permissions-Policy: geolocation=(), microphone=()
 
 Make sure to host fonts locally if privacy or integrity is important, and add SRI for third-party scripts when feasible.
+
+### Full 'unsafe-inline' removal guidance
+If you want to enforce a strict Content-Security-Policy without `style-src 'unsafe-inline'` (recommended), move all runtime `style.*` property assignments in JS into CSS classes and precomputed positions or use server-side nonces. The included `assets/fonts/fonts.css` file contains sample @font-face entries; add your own font files to `assets/fonts`, uncomment the `<link>` tags in the HTML, and switch `font-src` to 'self' in server headers.
 
 ## Security Scanning
 A GitHub Action `security-scan.yml` is included that runs a static grep-based scan and ESLint on PRs to catch common issues.

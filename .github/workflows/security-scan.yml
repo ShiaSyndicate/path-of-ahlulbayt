@@ -18,13 +18,22 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Generate package-lock & Install dependencies
-        run: npm install --package-lock && npm ci
+      - name: Install dependencies
+        run: npm ci
+      - name: Start static server
+        run: npx serve . -l 3000 &
+      - name: Install Playwright browsers
+        run: npx playwright install
+      - name: Install Playwright dependencies (Linux)
+        run: sudo npx playwright install-deps || true
 
       - name: Run security grep scan
         run: npm run security:scan
 
-      - name: Run ESLint
-        run: npm run lint
+      - name: Run ESLint (strict)
+        run: npm run lint:ci
+
+      - name: Run Playwright tests
+        run: npx playwright test --config=playwright.config.js || true
       - name: NPM Audit (fail on high severity)
-        run: npm audit --audit-level=high || true
+        run: npm audit --audit-level=high

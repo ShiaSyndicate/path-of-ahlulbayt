@@ -7,9 +7,9 @@
     --timeline-bar-height: 20px;
     --timeline-gap: 150px;
     /* Increased to prevent overlap */
-    --font-heading: 'CinzelLocal', serif;
-    --font-body: 'InterLocal', sans-serif;
-    --font-arabic: 'AmiriLocal', serif;
+    --font-heading: 'Cinzel', serif;
+    --font-body: 'Inter', sans-serif;
+    --font-arabic: 'Amiri', serif;
     --bar-bg: rgba(255, 255, 255, 0.05);
     --bar-border: rgba(255, 255, 255, 0.1);
     --bar-hover: rgba(255, 255, 255, 0.1);
