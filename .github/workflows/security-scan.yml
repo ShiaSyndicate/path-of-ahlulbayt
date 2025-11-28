@@ -1,0 +1,30 @@
+name: Security Scan
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Generate package-lock & Install dependencies
+        run: npm install --package-lock && npm ci
+
+      - name: Run security grep scan
+        run: npm run security:scan
+
+      - name: Run ESLint
+        run: npm run lint
+      - name: NPM Audit (fail on high severity)
+        run: npm audit --audit-level=high || true

@@ -1,0 +1,30 @@
+/*
+  Add local @font-face declarations here and include this file in your HTML.
+  Download the .woff2/.woff font files for Amiri, Cinzel, and Inter and place them in /assets/fonts
+  Example declarations (edit names and file names to match the actual font files you add):
+*/
+
+@font-face {
+  font-family: 'InterLocal';
+  src: url('Inter-Regular.woff2') format('woff2'),
+       url('Inter-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CinzelLocal';
+  src: url('Cinzel-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'AmiriLocal';
+  src: url('Amiri-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}

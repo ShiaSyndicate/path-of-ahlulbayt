@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Path of AhlulBayt</title>
+    <!-- Basic security headers via meta tags for static hosting (consider enforcing via server headers in production) -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://www.al-islam.org; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none';">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <link rel="stylesheet" href="style.css">
+    <!-- Fonts are hosted locally to avoid external resource loading and to allow strict CSP --->
+    <!-- Place font files in assets/fonts and uncomment the following local font stylesheet if you have them -->
+    <!-- <link href="assets/fonts/fonts.css" rel="stylesheet"> -->
+</head>
+
+<body class="home-body">
+    <div id="stars-container"></div>
+
+    <main class="home-content">
+        <div class="glow-orb"></div>
+        <h1 class="main-title">Path of AhlulBayt</h1>
+        <p class="subtitle">The 14 Infallibles (AS)</p>
+        <p class="description">Journey through the sacred timeline of the Prophet Muhammad (PBUH), Sayyida Fatima (SA),
+            and the Twelve Imams</p>
+        <a href="timeline.html" class="enter-btn">
+            <span>Enter Timeline</span>
+            <svg class="btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+        </a>
+    </main>
+
+    <section class="info-cards">
+        <div class="info-card">
+            <div class="card-icon">📖</div>
+            <h3>Historical Timeline</h3>
+            <p>Explore the lives and events of the 14 Infallibles from 570 CE to the present</p>
+        </div>
+        <div class="info-card">
+            <div class="card-icon">⭐</div>
+            <h3>Key Events</h3>
+            <p>Discover significant moments including births, battles, treaties, and martyrdoms</p>
+        </div>
+        <div class="info-card">
+            <div class="card-icon">📚</div>
+            <h3>Authentic Sources</h3>
+            <p>All events referenced with citations from classical Islamic texts</p>
+        </div>
+    </section>
+
+    <section class="quote-section">
+        <div class="quote-container">
+            <p class="quote-text">"The example of my Ahlul Bayt is like the Ark of Noah; whoever boards it is saved, and
+                whoever turns away from it is drowned."</p>
+            <p class="quote-attribution">— Prophet Muhammad (PBUH)</p>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

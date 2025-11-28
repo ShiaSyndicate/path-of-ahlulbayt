@@ -1,0 +1,9 @@
+node_modules
+assets
+*.html
+style.css
+LICENSE
+README.md
+SECURITY.md
+netlify.toml
+nginx.conf

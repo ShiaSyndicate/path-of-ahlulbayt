@@ -1,0 +1,15 @@
+{
+  "name": "path-of-ahlulbayt",
+  "version": "1.0.0",
+  "description": "Static timeline site for the Path of AhlulBayt",
+  "private": true,
+  "scripts": {
+    "security:scan": "node ./scripts/security-check.js",
+    "lint": "eslint . --ext .js",
+    "ci": "npm run security:scan && npm run lint"
+  },
+  "devDependencies": {
+    "eslint": "^8.50.0",
+    "eslint-plugin-security": "^1.7.0"
+  }
+}
