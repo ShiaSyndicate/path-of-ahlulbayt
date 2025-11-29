@@ -1,4 +1,4 @@
-// Playwright config for the e2e safety tests
+
 const { defineConfig } = require('@playwright/test');
 
 module.exports = defineConfig({

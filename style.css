@@ -6,7 +6,7 @@
     --bg-color: #050510;
     --timeline-bar-height: 20px;
     --timeline-gap: 150px;
-    /* Increased to prevent overlap */
+    
     --font-heading: 'Cinzel', serif;
     --font-body: 'Inter', sans-serif;
     --font-arabic: 'Amiri', serif;
@@ -31,7 +31,7 @@ body {
     overflow-x: hidden;
 }
 
-/* Universe Background */
+ 
 #stars-container {
     position: fixed;
     top: 0;
@@ -50,7 +50,7 @@ body {
     opacity: 0.6;
 }
 
-/* Header */
+ 
 header {
     background-color: rgba(0, 0, 0, 0.8);
     padding: 1.5rem 1rem;
@@ -88,7 +88,7 @@ main {
     padding: 0 1rem;
 }
 
-/* Controls */
+ 
 .controls {
     background: rgba(255, 255, 255, 0.03);
     padding: 1.5rem;
@@ -104,7 +104,7 @@ main {
     font-size: 1.2rem;
 }
 
-/* Utility classes to replace inline styles in HTML */
+ 
 .section-separator {
     margin-top: 20px;
     border-top: 1px solid rgba(255,255,255,0.1);
@@ -151,7 +151,7 @@ main {
     accent-color: var(--secondary-color);
 }
 
-/* Timeline Container */
+ 
 .timeline-container {
     background: rgba(0, 0, 0, 0.2);
     padding: 2rem;
@@ -161,7 +161,7 @@ main {
     overflow: auto;
     scroll-behavior: smooth;
     height: 70vh;
-    /* Fixed height for vertical dragging */
+    
     max-height: 800px;
     position: relative;
 }
@@ -234,13 +234,13 @@ main {
     margin-bottom: var(--timeline-gap);
     display: flex;
     align-items: center;
-    /* Ensure row takes full width to allow sticky child to move */
+    
     min-width: 100%;
 }
 
 .timeline-label {
     position: sticky;
-    /* Make sticky */
+    
     left: 0;
     width: 220px;
     padding: 10px 20px 10px 10px;
@@ -250,15 +250,15 @@ main {
     overflow: hidden;
     text-overflow: ellipsis;
     z-index: 100;
-    /* High z-index to stay on top */
+    
     color: var(--secondary-color);
     font-family: var(--font-heading);
     font-size: 0.95rem;
     background: linear-gradient(90deg, var(--bg-color) 85%, transparent);
-    /* Background to hide scrolling content */
+    
     border-right: 1px solid rgba(255, 255, 255, 0.1);
     flex-shrink: 0;
-    /* Prevent shrinking */
+    
 }
 
 .timeline-bar-container {
@@ -385,7 +385,7 @@ main {
     background-color: #c0392b;
 }
 
-/* Modal Styles */
+ 
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -465,7 +465,7 @@ footer {
     font-size: 0.9rem;
 }
 
-/* ===== HOME PAGE STYLES ===== */
+ 
 
 .home-body {
     overflow-y: auto;
@@ -621,7 +621,7 @@ footer {
     padding: 1.75rem;
     text-align: left;
     transition: transform 0.25s ease, box-shadow 0.25s ease;
-    /* Remove backdrop blur to keep a cleaner, modern look */
+    
 }
 
 .info-card:hover {
@@ -707,7 +707,7 @@ footer {
     text-align: right;
 }
 
-/* Floating Zoom Controls */
+ 
 .floating-controls {
     position: fixed;
     bottom: 30px;

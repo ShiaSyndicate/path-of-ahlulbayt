@@ -3,15 +3,15 @@ const { test, expect } = require('@playwright/test');
 test.describe('Safety checks', () => {
   test('modal source link is safe and use noopener', async ({ page }) => {
     const index = 'http://localhost:3000/index.html';
-    // Start local server externally (like using `npx serve .`).
+    
     await page.goto(index);
-    // Click the Enter Timeline to get to timeline.html
+    
     await page.click('a.enter-btn');
 
     await page.waitForLoadState('networkidle');
-    // Wait for timeline to render
+    
     await page.waitForSelector('body');
-    // Open first event modal by clicking an event marker
+    
     const eventMarker = await page.$('.event-marker');
     if (eventMarker) {
       await eventMarker.click();

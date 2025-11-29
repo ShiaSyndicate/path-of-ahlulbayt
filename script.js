@@ -278,13 +278,13 @@ const imams = [
     }
 ];
 
-// Configuration
+
 const START_YEAR = 550;
 const END_YEAR = 2025;
 let pixelsPerYear = 5;
 let currentZoom = 1;
 
-// DOM Elements
+
 const timelineChart = document.getElementById('timeline-chart');
 const yearMarkers = document.getElementById('year-markers');
 const checkboxesContainer = document.getElementById('imam-checkboxes');
@@ -295,7 +295,7 @@ const starsContainer = document.getElementById('stars-container');
 const eventFiltersContainer = document.getElementById('event-filters');
 const timelineContainer = document.querySelector('.timeline-container');
 
-// Modal Elements
+
 const modalOverlay = document.getElementById('event-modal');
 const modalCloseBtn = document.querySelector('.modal-close');
 const modalTitle = document.getElementById('modal-title');
@@ -303,11 +303,11 @@ const modalDate = document.getElementById('modal-date');
 const modalDescription = document.getElementById('modal-description');
 const modalSourceText = document.getElementById('modal-source-text');
 
-// State
+
 let selectedImams = new Set(imams.map(i => i.name));
 let selectedEventTypes = new Set(['birth', 'death', 'battle', 'revelation', 'appointment', 'treaty', 'occultation', 'marriage', 'speech', 'migration', 'conquest', 'crime', 'miracle']);
 
-// Initialize
+
 function init() {
     imams.sort((a, b) => a.start - b.start);
     createStars();
@@ -317,8 +317,8 @@ function init() {
     setupEventListeners();
 }
 
-// Create Stars Background
-// Create Stars Background
+
+
 function createStars() {
     if (!starsContainer) return;
     const starCount = 200;
@@ -339,7 +339,7 @@ function createStars() {
     }
 }
 
-// Create Event Filters
+
 function createEventFilters() {
     if (!eventFiltersContainer) return;
     const types = ['birth', 'death', 'battle', 'revelation', 'appointment', 'treaty', 'occultation', 'crime', 'miracle'];
@@ -368,10 +368,10 @@ function createEventFilters() {
     });
 }
 
-// Create Checkboxes
+
 function createCheckboxes() {
     if (!checkboxesContainer) return;
-    // Remove child nodes instead of using innerHTML to avoid accidental HTML injection
+    
     while (checkboxesContainer && checkboxesContainer.firstChild) checkboxesContainer.removeChild(checkboxesContainer.firstChild);
     if (villainCheckboxesContainer) while (villainCheckboxesContainer.firstChild) villainCheckboxesContainer.removeChild(villainCheckboxesContainer.firstChild);
 
@@ -409,7 +409,7 @@ function createCheckboxes() {
     });
 }
 
-// Setup Event Listeners
+
 function setupEventListeners() {
     if (selectAllBtn) {
         selectAllBtn.addEventListener('click', () => {
@@ -440,18 +440,18 @@ function setupEventListeners() {
 
     if (fitViewBtn) {
         fitViewBtn.addEventListener('click', () => {
-            // Calculate optimal zoom to fit all content
-            const containerWidth = timelineContainer.clientWidth - 300; // Subtract label width
+            
+            const containerWidth = timelineContainer.clientWidth - 300; 
             const totalYears = END_YEAR - START_YEAR;
             const optimalPixelsPerYear = containerWidth / totalYears;
 
-            // Calculate zoom level (base is 5px)
+            
             let optimalZoom = optimalPixelsPerYear / 5;
 
-            // Clamp to min/max
+            
             optimalZoom = Math.max(0.1, Math.min(4, optimalZoom));
 
-            // Update state and UI
+            
             currentZoom = optimalZoom;
             pixelsPerYear = 5 * currentZoom;
             if (zoomSlider) zoomSlider.value = currentZoom;
@@ -488,10 +488,10 @@ function openModal(event) {
     modalDescription.textContent = event.description;
 
     if (event.sourceUrl) {
-        // Create link element safely to prevent XSS
+        
         const link = document.createElement('a');
 
-        // Validate URL scheme before assigning to href to prevent javascript: or data: URIs from being used
+        
         const isValidUrl = (url) => {
             try {
                 const parsed = new URL(url, window.location.origin);
@@ -504,14 +504,14 @@ function openModal(event) {
         if (isValidUrl(event.sourceUrl)) {
             link.href = event.sourceUrl;
             link.target = '_blank';
-            link.rel = 'noopener noreferrer'; // Security best practice
+            link.rel = 'noopener noreferrer'; 
             link.className = 'modal-source-link';
             link.textContent = event.source || "Source";
 
-            modalSourceText.textContent = ''; // Clear previous content
+            modalSourceText.textContent = ''; 
             modalSourceText.appendChild(link);
         } else {
-            // If URL is invalid or unsafe, present the source text but do not render a link.
+            
             modalSourceText.textContent = event.source || "Source not specified (unsafe URL)";
         }
     } else {
@@ -527,7 +527,7 @@ function closeModal() {
     }
 }
 
-// Render Timeline
+
 function renderTimeline() {
     if (!timelineChart || !yearMarkers) return;
 
@@ -558,7 +558,7 @@ function renderTimeline() {
         const row = document.createElement('div');
         row.className = 'timeline-row';
 
-        // label removed — not used but kept for structure if needed in the future
+        
         timelineChart.appendChild(row);
 
         const labelContainer = document.createElement('div');
@@ -567,7 +567,7 @@ function renderTimeline() {
         if (imam.role === 'villain') {
             labelContainer.classList.add('villain-label');
         }
-        // Sticky label logic handled by CSS, but we need to ensure structure
+        
         row.appendChild(labelContainer);
 
 
@@ -626,7 +626,7 @@ function renderTimeline() {
                     const eventMarker = document.createElement('div');
                     const ALLOWED_EVENT_TYPES = ['birth','death','battle','revelation','appointment','treaty','occultation','marriage','speech','migration','conquest','crime','miracle'];
                     const safeType = ALLOWED_EVENT_TYPES.includes(event.type) ? event.type : 'other';
-                    // Use classList.add to avoid replacing existing classes and avoid dangerous concatenations
+                    
                     eventMarker.classList.add('event-marker');
                     eventMarker.classList.add(`event-${safeType}`);
                     const eventOffset = (event.year - START_YEAR) * pixelsPerYear;
@@ -638,10 +638,10 @@ function renderTimeline() {
 
                     let chosenLevel = 0;
                     let found = false;
-                    /* eslint-disable security/detect-object-injection */
+                    
                     for (let i = 0; i < levels.length; i++) {
-                        // Access to a numeric index into a known local array is safe, but eslint's
-                        // security plugin may flag generic object injection; read into a local variable
+                        
+                        
                         const lastEnd = levels[i];
                         if (eventStart > lastEnd + 10) {
                             chosenLevel = i;
@@ -649,18 +649,18 @@ function renderTimeline() {
                             break;
                         }
                     }
-                    /* eslint-enable security/detect-object-injection */
+                    
 
                     if (!found) {
-                        // Ensure event.year is an integer for deterministic bucketing
+                        
                         const yearInt = parseInt(event.year, 10) || 0;
                         chosenLevel = (Math.abs(yearInt) % levels.length);
                     }
 
-                    // Sanitize chosenLevel to prevent array injection vulnerabilities
+                    
                     chosenLevel = Math.max(0, Math.min(levels.length - 1, Number(chosenLevel) || 0));
-                    // We validated and clamped chosenLevel above, this assignment is safe
-                    /* eslint-disable-next-line security/detect-object-injection */
+                    
+                    
                     levels[chosenLevel] = eventEnd;
 
                     const eventLabel = document.createElement('span');

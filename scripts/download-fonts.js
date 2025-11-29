@@ -1,10 +1,5 @@
-/* eslint-disable security/detect-non-literal-fs-filename, security/detect-non-literal-regexp */
-/*
-  Lightweight font downloader for Google Fonts CSS.
-  NOTE: This script simplifies extraction and downloads woff2 fonts into assets/fonts.
-  It does not cover every Google Fonts edge case. Run it manually to pull fonts for local hosting.
-  Usage: node scripts/download-fonts.js
-*/
+
+
 const https = require('https');
 const fs = require('fs');
 const path = require('path');
@@ -37,10 +32,10 @@ async function run() {
   const familyQuery = families.map(encodeURIComponent).join('&family=');
   const cssUrl = `https://fonts.googleapis.com/css2?family=${familyQuery}&display=swap`;
   try {
-    // Google Fonts requires a browser-like User-Agent; set it to avoid 403 or non-browser content
+    
     const cssBuffer = await download(cssUrl, { 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64)' });
     const cssText = cssBuffer.toString('utf8');
-    // parse CSS for woff2 urls
+    
     const matches = Array.from(cssText.matchAll(/url\((https:\/\/[^)]+\.(woff2|ttf))\)/g));
     const fontUrls = matches.map(m => m[1]);
     const fonts = [];
@@ -57,13 +52,13 @@ async function run() {
       fonts.push({ url, fileName });
     }
 
-    // Replace remote URLs in the CSS with local filenames and save
+    
     let localCss = cssText;
     for (const f of fonts) {
       const regex = new RegExp(f.url.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g');
       localCss = localCss.replace(regex, `${f.fileName}`);
     }
-    fs.writeFileSync(fontsCssPath, '/* Auto-generated fonts.css (local) */\n' + localCss);
+    fs.writeFileSync(fontsCssPath, '\n' + localCss);
     console.log('Fonts downloaded, update `assets/fonts/fonts.css` and uncomment link in HTML to use local fonts.');
   } catch (err) {
     console.error('Failed to download fonts:', err.message);

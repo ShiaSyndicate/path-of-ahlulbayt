@@ -1,5 +1,5 @@
-/* eslint-env node */
-/* eslint-disable security/detect-non-literal-fs-filename, no-console */
+
+
 const fs = require('fs');
 const path = require('path');
 
@@ -27,7 +27,7 @@ function walk(dir) {
   }
 }
 
-// Run the scan
+
 walk(projectRoot);
 
 let issues = [];
@@ -36,7 +36,7 @@ for (const file of filesToCheck) {
   const content = fs.readFileSync(file, 'utf8');
   patterns.forEach(p => {
     if (p.key === 'csp-meta') {
-      // Check presence across all HTML files; we'll handle separately
+      
       return;
     }
     const match = content.match(p.re);
@@ -44,7 +44,7 @@ for (const file of filesToCheck) {
   });
 }
 
-// CSP Meta checks: ensure all HTML files have CSP meta tag
+
 const htmlFiles = filesToCheck.filter(f => f.endsWith('.html'));
 htmlFiles.forEach(file => {
   const content = fs.readFileSync(file, 'utf8');
@@ -63,6 +63,6 @@ if (issues.length > 0) {
   console.log('No issues found by security-check script.');
 }
 
-// Exit code: 0 for MS readable but non-zero if high severity issues exist
+
 if (issues.some(i => i.severity === 'high')) process.exit(1);
 process.exit(0);
