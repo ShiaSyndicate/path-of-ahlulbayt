@@ -1,6 +1,9 @@
+// Add an image property to each person. Update these paths when you have the real images!
 const imams = [
     {
         name: "Prophet Muhammad (PBUH)",
+        // ADD THIS LINE: point to the new banner image
+        image: "assets/images/prophet-banner.jpg", 
         start: 570,
         end: 632,
         events: [
@@ -28,6 +31,7 @@ const imams = [
     },
     {
         name: "Sayyida Fatima (SA)",
+        image: "assets/images/fatima.jpg",
         start: 615,
         end: 632,
         events: [
@@ -41,6 +45,7 @@ const imams = [
     },
     {
         name: "Imam Ali (AS)",
+        image: "assets/images/imam-ali.jpg",
         start: 600,
         end: 661,
         events: [
@@ -61,6 +66,7 @@ const imams = [
     },
     {
         name: "Imam Hasan (AS)",
+        image: "assets/images/imam-hasan.jpg",
         start: 625,
         end: 670,
         events: [
@@ -74,6 +80,7 @@ const imams = [
     },
     {
         name: "Imam Husayn (AS)",
+        image: "assets/images/imam-husayn.jpg",
         start: 626,
         end: 680,
         events: [
@@ -85,6 +92,7 @@ const imams = [
     },
     {
         name: "Imam Sajjad (AS)",
+        image: "assets/images/imam-sajjad.jpg",
         start: 659,
         end: 713,
         events: [
@@ -98,6 +106,7 @@ const imams = [
     },
     {
         name: "Imam Baqir (AS)",
+        image: "assets/images/imam-baqir.jpg",
         start: 676,
         end: 733,
         events: [
@@ -110,6 +119,7 @@ const imams = [
     },
     {
         name: "Imam Sadiq (AS)",
+        image: "assets/images/imam-sadiq.jpg",
         start: 702,
         end: 765,
         events: [
@@ -122,6 +132,7 @@ const imams = [
     },
     {
         name: "Imam Kazim (AS)",
+        image: "assets/images/imam-kazim.jpg",
         start: 745,
         end: 799,
         events: [
@@ -134,6 +145,7 @@ const imams = [
     },
     {
         name: "Imam Reza (AS)",
+        image: "assets/images/imam-reza.jpg",
         start: 765,
         end: 818,
         events: [
@@ -147,6 +159,7 @@ const imams = [
     },
     {
         name: "Imam Jawad (AS)",
+        image: "assets/images/imam-jawad.jpg",
         start: 811,
         end: 835,
         events: [
@@ -159,6 +172,7 @@ const imams = [
     },
     {
         name: "Imam Hadi (AS)",
+        image: "assets/images/imam-hadi.jpg",
         start: 828,
         end: 868,
         events: [
@@ -171,6 +185,7 @@ const imams = [
     },
     {
         name: "Imam Askari (AS)",
+        image: "assets/images/imam-askari.jpg",
         start: 846,
         end: 874,
         events: [
@@ -182,6 +197,7 @@ const imams = [
     },
     {
         name: "Imam Mahdi (AS)",
+        image: "assets/images/imam-mahdi.jpg",
         start: 869,
         end: 2025,
         events: [
@@ -194,6 +210,7 @@ const imams = [
     },
     {
         name: "Muawiya ibn Abi Sufyan (LA)",
+        image: "assets/images/villain.jpg",
         role: "villain",
         start: 605,
         end: 680,
@@ -206,6 +223,7 @@ const imams = [
     },
     {
         name: "Yazid ibn Muawiya (LA)",
+        image: "assets/images/villain.jpg",
         role: "villain",
         start: 646,
         end: 683,
@@ -217,6 +235,7 @@ const imams = [
     },
     {
         name: "Harun al-Rashid (LA)",
+        image: "assets/images/villain.jpg",
         role: "villain",
         start: 763,
         end: 809,
@@ -227,6 +246,7 @@ const imams = [
     },
     {
         name: "Al-Mutawakkil (LA)",
+        image: "assets/images/villain.jpg",
         role: "villain",
         start: 822,
         end: 861,
@@ -237,6 +257,7 @@ const imams = [
     },
     {
         name: "Abu Bakr (LA)",
+        image: "assets/images/villain.jpg",
         role: "villain",
         start: 573,
         end: 634,
@@ -248,6 +269,7 @@ const imams = [
     },
     {
         name: "Umar ibn al-Khattab (LA)",
+        image: "assets/images/villain.jpg",
         role: "villain",
         start: 584,
         end: 644,
@@ -259,6 +281,7 @@ const imams = [
     },
     {
         name: "Uthman ibn Affan (LA)",
+        image: "assets/images/villain.jpg",
         role: "villain",
         start: 576,
         end: 656,
@@ -269,6 +292,7 @@ const imams = [
     },
     {
         name: "Khalid ibn Walid (LA)",
+        image: "assets/images/villain.jpg",
         role: "villain",
         start: 592,
         end: 642,
@@ -278,12 +302,10 @@ const imams = [
     }
 ];
 
-
 const START_YEAR = 550;
 const END_YEAR = 2025;
 let pixelsPerYear = 5;
 let currentZoom = 1;
-
 
 const timelineChart = document.getElementById('timeline-chart');
 const yearMarkers = document.getElementById('year-markers');
@@ -295,7 +317,6 @@ const starsContainer = document.getElementById('stars-container');
 const eventFiltersContainer = document.getElementById('event-filters');
 const timelineContainer = document.querySelector('.timeline-container');
 
-
 const modalOverlay = document.getElementById('event-modal');
 const modalCloseBtn = document.querySelector('.modal-close');
 const modalTitle = document.getElementById('modal-title');
@@ -303,10 +324,8 @@ const modalDate = document.getElementById('modal-date');
 const modalDescription = document.getElementById('modal-description');
 const modalSourceText = document.getElementById('modal-source-text');
 
-
 let selectedImams = new Set(imams.map(i => i.name));
 let selectedEventTypes = new Set(['birth', 'death', 'battle', 'revelation', 'appointment', 'treaty', 'occultation', 'marriage', 'speech', 'migration', 'conquest', 'crime', 'miracle']);
-
 
 function init() {
     imams.sort((a, b) => a.start - b.start);
@@ -316,8 +335,6 @@ function init() {
     renderTimeline();
     setupEventListeners();
 }
-
-
 
 function createStars() {
     if (!starsContainer) return;
@@ -338,7 +355,6 @@ function createStars() {
         starsContainer.appendChild(star);
     }
 }
-
 
 function createEventFilters() {
     if (!eventFiltersContainer) return;
@@ -367,7 +383,6 @@ function createEventFilters() {
         eventFiltersContainer.appendChild(label);
     });
 }
-
 
 function createCheckboxes() {
     if (!checkboxesContainer) return;
@@ -409,7 +424,6 @@ function createCheckboxes() {
     });
 }
 
-
 function setupEventListeners() {
     if (selectAllBtn) {
         selectAllBtn.addEventListener('click', () => {
@@ -440,22 +454,15 @@ function setupEventListeners() {
 
     if (fitViewBtn) {
         fitViewBtn.addEventListener('click', () => {
-            
             const containerWidth = timelineContainer.clientWidth - 300; 
             const totalYears = END_YEAR - START_YEAR;
             const optimalPixelsPerYear = containerWidth / totalYears;
-
-            
             let optimalZoom = optimalPixelsPerYear / 5;
-
-            
             optimalZoom = Math.max(0.1, Math.min(4, optimalZoom));
-
             
             currentZoom = optimalZoom;
             pixelsPerYear = 5 * currentZoom;
             if (zoomSlider) zoomSlider.value = currentZoom;
-
             renderTimeline();
         });
     }
@@ -475,10 +482,7 @@ function setupEventListeners() {
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeModal();
     });
-
-
 }
-
 
 function openModal(event) {
     if (!modalOverlay) return;
@@ -488,10 +492,7 @@ function openModal(event) {
     modalDescription.textContent = event.description;
 
     if (event.sourceUrl) {
-        
         const link = document.createElement('a');
-
-        
         const isValidUrl = (url) => {
             try {
                 const parsed = new URL(url, window.location.origin);
@@ -507,11 +508,9 @@ function openModal(event) {
             link.rel = 'noopener noreferrer'; 
             link.className = 'modal-source-link';
             link.textContent = event.source || "Source";
-
             modalSourceText.textContent = ''; 
             modalSourceText.appendChild(link);
         } else {
-            
             modalSourceText.textContent = event.source || "Source not specified (unsafe URL)";
         }
     } else {
@@ -527,10 +526,10 @@ function closeModal() {
     }
 }
 
-
 function renderTimeline() {
     if (!timelineChart || !yearMarkers) return;
 
+    // Clear old renders
     while (timelineChart.firstChild) timelineChart.removeChild(timelineChart.firstChild);
     while (yearMarkers.firstChild) yearMarkers.removeChild(yearMarkers.firstChild);
 
@@ -544,7 +543,6 @@ function renderTimeline() {
 
     for (let year = START_YEAR; year <= END_YEAR; year += markerInterval) {
         const left = (year - START_YEAR) * pixelsPerYear;
-
         const marker = document.createElement('div');
         marker.className = 'year-marker';
         marker.style.left = `${left}px`;
@@ -557,20 +555,37 @@ function renderTimeline() {
 
         const row = document.createElement('div');
         row.className = 'timeline-row';
-
-        
         timelineChart.appendChild(row);
 
+        // --- Create Left-Side Label Area ---
         const labelContainer = document.createElement('div');
         labelContainer.className = 'timeline-label';
-        labelContainer.textContent = imam.name;
+        
+        // Circular Profile Image (if provided)
+        if (imam.image) {
+            const imgElement = document.createElement('img');
+            imgElement.src = imam.image;
+            imgElement.alt = imam.name;
+            imgElement.className = 'timeline-person-image';
+            
+            // Fallback user icon if image is not found
+            imgElement.onerror = function() {
+                this.src = 'data:image/svg+xml;charset=UTF-8,%3Csvg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="%23d4af37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"%3E%3Cpath d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"%3E%3C/path%3E%3Ccircle cx="12" cy="7" r="4"%3E%3C/circle%3E%3C/svg%3E';
+            };
+            labelContainer.appendChild(imgElement);
+        }
+
+        const nameText = document.createElement('span');
+        nameText.textContent = imam.name;
+        labelContainer.appendChild(nameText);
+
         if (imam.role === 'villain') {
             labelContainer.classList.add('villain-label');
         }
         
         row.appendChild(labelContainer);
 
-
+        // --- Create Timeline Bar Area ---
         const barContainer = document.createElement('div');
         barContainer.className = 'timeline-bar-container';
 
@@ -578,43 +593,47 @@ function renderTimeline() {
         const duration = imam.end - imam.start;
         const width = duration * pixelsPerYear;
 
+        // The background connector line
         const connector = document.createElement('div');
         connector.className = 'connector-line';
         connector.style.left = `${startOffset}px`;
-        const rowHeight = 220;
+        const rowHeight = 130; // Reduced height because gaps are smaller
         const heightToTop = (index * rowHeight) + 20;
         connector.style.height = `${heightToTop}px`;
         connector.style.top = `-${heightToTop}px`;
         barContainer.appendChild(connector);
 
+        // The main interactive bar
+// 1. Create the main timeline bar container
         const bar = document.createElement('div');
         bar.className = 'timeline-bar';
-
-        if (imam.name.includes("Prophet")) {
-            bar.classList.add('role-prophet');
-        } else if (imam.name.includes("Fatima")) {
-            bar.classList.add('role-fatima');
-        } else if (imam.role === 'villain') {
-            bar.classList.add('role-villain');
-        } else {
-            bar.classList.add('role-imam');
-        }
+        
+        // Add fallback color classes just in case
+        if (imam.name.includes("Prophet")) bar.classList.add('role-prophet');
+        else if (imam.name.includes("Fatima")) bar.classList.add('role-fatima');
+        else if (imam.role === 'villain') bar.classList.add('role-villain');
+        else bar.classList.add('role-imam');
 
         bar.style.left = `${startOffset}px`;
         bar.style.width = `${width}px`;
         bar.title = `${imam.name}\n${imam.start} - ${imam.end} CE`;
 
-        const dates = document.createElement('div');
-        dates.className = 'dates';
-        dates.textContent = `${imam.start} - ${imam.end}`;
-        bar.appendChild(dates);
-
+        // 2. NEW: Inject the wide background image strip inside the timeline bar
+        if (imam.image) {
+            const bgImage = document.createElement('img');
+            bgImage.src = imam.image;
+            bgImage.className = 'timeline-bar-bg';
+            // Hide image element entirely if the file isn't found, so fallback colors show
+            bgImage.onerror = function() {
+                this.style.display = 'none';
+            };
+            bar.appendChild(bgImage);
+        }
         barContainer.appendChild(bar);
 
+        // --- Create Event Star Markers ---
         if (imam.events) {
             const sortedEvents = [...imam.events].sort((a, b) => a.year - b.year);
-            const levels = [-1000, -1000, -1000, -1000, -1000, -1000];
-            const estimatedCharWidth = 7;
 
             sortedEvents.forEach(event => {
                 const allowedFallbackTypes = ['marriage', 'speech', 'migration', 'conquest', 'crime', 'miracle'];
@@ -629,66 +648,19 @@ function renderTimeline() {
                     
                     eventMarker.classList.add('event-marker');
                     eventMarker.classList.add(`event-${safeType}`);
+                    
+                    // Place the star on the horizontal timeline
                     const eventOffset = (event.year - START_YEAR) * pixelsPerYear;
                     eventMarker.style.left = `${eventOffset}px`;
 
-                    const textWidth = event.name.length * estimatedCharWidth + 20;
-                    const eventStart = eventOffset - (textWidth / 2);
-                    const eventEnd = eventStart + textWidth;
-
-                    let chosenLevel = 0;
-                    let found = false;
-                    
-                    for (let i = 0; i < levels.length; i++) {
-                        
-                        
-                        const lastEnd = levels[i];
-                        if (eventStart > lastEnd + 10) {
-                            chosenLevel = i;
-                            found = true;
-                            break;
-                        }
-                    }
-                    
-
-                    if (!found) {
-                        
-                        const yearInt = parseInt(event.year, 10) || 0;
-                        chosenLevel = (Math.abs(yearInt) % levels.length);
-                    }
-
-                    
-                    chosenLevel = Math.max(0, Math.min(levels.length - 1, Number(chosenLevel) || 0));
-                    
-                    
-                    levels[chosenLevel] = eventEnd;
-
+                    // Create the hidden hover label
                     const eventLabel = document.createElement('span');
                     eventLabel.className = 'event-label';
                     eventLabel.textContent = event.name;
 
-                    const isTop = (chosenLevel % 2 === 0);
-                    const levelIndex = Math.floor(chosenLevel / 2);
-                    const verticalOffset = 35 + (levelIndex * 30);
-
-                    if (isTop) {
-                        eventLabel.style.bottom = `${verticalOffset}px`;
-                        const leaderLine = document.createElement('div');
-                        leaderLine.className = 'leader-line';
-                        leaderLine.style.bottom = '12px';
-                        leaderLine.style.height = `${verticalOffset - 12}px`;
-                        eventMarker.appendChild(leaderLine);
-                    } else {
-                        eventLabel.style.top = `${verticalOffset + 20}px`;
-                        const leaderLine = document.createElement('div');
-                        leaderLine.className = 'leader-line';
-                        leaderLine.style.top = '12px';
-                        leaderLine.style.height = `${verticalOffset + 8}px`;
-                        eventMarker.appendChild(leaderLine);
-                    }
-
                     eventMarker.appendChild(eventLabel);
 
+                    // Open full details on click
                     eventMarker.addEventListener('click', (e) => {
                         e.stopPropagation();
                         openModal(event);
@@ -703,4 +675,5 @@ function renderTimeline() {
     });
 }
 
+// Boot up the application
 init();

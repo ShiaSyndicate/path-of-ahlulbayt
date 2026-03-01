@@ -4,15 +4,14 @@
     --accent-color: #e6d5b8;
     --text-color: #e0e0e0;
     --bg-color: #050510;
-    --timeline-bar-height: 20px;
-    --timeline-gap: 150px;
+    
+    /* UPDATED: Thicker bars for images, smaller gaps to remove empty space */
+    --timeline-bar-height: 80px; 
+    --timeline-gap: 50px; 
     
     --font-heading: 'Cinzel', serif;
     --font-body: 'Inter', sans-serif;
     --font-arabic: 'Amiri', serif;
-    --bar-bg: rgba(255, 255, 255, 0.05);
-    --bar-border: rgba(255, 255, 255, 0.1);
-    --bar-hover: rgba(255, 255, 255, 0.1);
     --gold: #d4af37;
     --teal: #008080;
 }
@@ -31,7 +30,9 @@ body {
     overflow-x: hidden;
 }
 
- 
+/* =========================================
+   BACKGROUND & GLOBAL
+   ========================================= */
 #stars-container {
     position: fixed;
     top: 0;
@@ -50,15 +51,19 @@ body {
     opacity: 0.6;
 }
 
- 
+/* =========================================
+   HEADER & FOOTER
+   ========================================= */
 header {
     background-color: rgba(0, 0, 0, 0.8);
-    padding: 1.5rem 1rem;
+    padding: 1.5rem 2rem;
     text-align: center;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 header h1 {
@@ -82,17 +87,26 @@ header h1 {
     color: var(--bg-color);
 }
 
+footer {
+    text-align: center;
+    padding: 2rem;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.9rem;
+}
+
 main {
     max-width: 1600px;
     margin: 2rem auto;
     padding: 0 1rem;
 }
 
- 
+/* =========================================
+   CONTROLS SECTION
+   ========================================= */
 .controls {
     background: rgba(255, 255, 255, 0.03);
     padding: 1.5rem;
-    border-radius: 4px;
+    border-radius: 8px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     margin-bottom: 2rem;
 }
@@ -104,7 +118,6 @@ main {
     font-size: 1.2rem;
 }
 
- 
 .section-separator {
     margin-top: 20px;
     border-top: 1px solid rgba(255,255,255,0.1);
@@ -133,8 +146,8 @@ main {
 
 .checkbox-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
     margin-top: 1rem;
 }
 
@@ -142,33 +155,40 @@ main {
     display: flex;
     align-items: center;
     color: rgba(255, 255, 255, 0.8);
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     cursor: pointer;
 }
 
 .checkbox-item input {
-    margin-right: 8px;
+    margin-right: 10px;
     accent-color: var(--secondary-color);
+    width: 16px;
+    height: 16px;
 }
 
- 
+/* =========================================
+   TIMELINE CONTAINER & FADED EDGES
+   ========================================= */
 .timeline-container {
     background: rgba(0, 0, 0, 0.2);
-    padding: 2rem;
-    border-radius: 4px;
+    padding: 2rem 0;
+    border-radius: 8px;
     margin-bottom: 20px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    overflow: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
     scroll-behavior: smooth;
-    height: 70vh;
-    
+    height: 75vh;
     max-height: 800px;
     position: relative;
+    
+    /* Overall fade for the scrolling container */
+    -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
 }
 
 .timeline-container::-webkit-scrollbar {
-    height: 16px;
-    width: 16px;
+    height: 10px;
 }
 
 .timeline-container::-webkit-scrollbar-track {
@@ -179,14 +199,11 @@ main {
 .timeline-container::-webkit-scrollbar-thumb {
     background-color: var(--secondary-color);
     border-radius: 4px;
-    border: 3px solid transparent;
-    background-clip: content-box;
 }
 
-.timeline-container::-webkit-scrollbar-thumb:hover {
-    background-color: #fff;
-}
-
+/* =========================================
+   TIMELINE CHART & ROWS
+   ========================================= */
 .timeline-header {
     position: relative;
     height: 40px;
@@ -207,7 +224,6 @@ main {
     transform: translateX(-50%);
     font-size: 0.85rem;
     color: rgba(255, 255, 255, 0.6);
-    font-family: var(--font-body);
 }
 
 .year-marker::after {
@@ -223,7 +239,7 @@ main {
 .timeline-chart {
     position: relative;
     min-height: 600px;
-    padding-top: 80px;
+    padding-top: 40px;
     width: fit-content;
     min-width: 100%;
 }
@@ -234,36 +250,45 @@ main {
     margin-bottom: var(--timeline-gap);
     display: flex;
     align-items: center;
-    
     min-width: 100%;
 }
 
+/* =========================================
+   TIMELINE LABELS & PROFILE PICTURES
+   ========================================= */
 .timeline-label {
     position: sticky;
-    
-    left: 0;
-    width: 220px;
-    padding: 10px 20px 10px 10px;
-    text-align: right;
-    font-weight: 500;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    left: 20px;
+    width: 250px;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
     z-index: 100;
     
     color: var(--secondary-color);
     font-family: var(--font-heading);
     font-size: 0.95rem;
-    background: linear-gradient(90deg, var(--bg-color) 85%, transparent);
-    
+    background: linear-gradient(90deg, var(--bg-color) 80%, transparent);
     border-right: 1px solid rgba(255, 255, 255, 0.1);
     flex-shrink: 0;
-    
+}
+
+.timeline-person-image {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--gold);
+    background-color: rgba(255, 255, 255, 0.1);
+    flex-shrink: 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
 }
 
 .timeline-bar-container {
     position: absolute;
-    left: 240px;
+    left: 280px;
     right: 0;
     height: 100%;
 }
@@ -277,45 +302,37 @@ main {
     border-left: 1px dashed rgba(255, 255, 255, 0.2);
 }
 
+/* =========================================
+   NEW TIMELINE IMAGE BARS
+   ========================================= */
 .timeline-bar {
     position: absolute;
     height: 100%;
     top: 0;
-    background: linear-gradient(to bottom, #2c3e50, #34495e);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
     z-index: 1;
+    /* Removed the solid background gradients so the image shows */
 }
 
-.timeline-bar.role-prophet {
-    background: linear-gradient(to bottom, #006400, #004d00);
-    border-color: #00ff00;
-}
-
-.timeline-bar.role-fatima {
-    background: linear-gradient(to bottom, #008080, #004d4d);
-    border-color: #00ffff;
-}
-
-.timeline-bar.role-imam {
-    background: linear-gradient(to bottom, #1a5f7a, #0d2f3d);
-    top: 50%;
-    transform: translateY(-50%);
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 0.8rem;
-    font-weight: 500;
+/* The actual image inside the bar */
+.timeline-bar-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Prevents zooming distortion */
+    border-radius: 8px;
     pointer-events: none;
-    white-space: nowrap;
+    opacity: 0.8; /* Slightly dimmed so stars pop */
+    
+    /* Fade the left and right edges of the image strip */
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }
 
 .timeline-row::before {
     content: '';
     position: absolute;
     top: 50%;
-    left: 240px;
+    left: 280px;
     right: 0;
     height: 1px;
     background: rgba(255, 255, 255, 0.05);
@@ -323,69 +340,77 @@ main {
     pointer-events: none;
 }
 
+/* =========================================
+   EVENTS: INTERACTIVE STARS
+   ========================================= */
 .event-marker {
     position: absolute;
     top: 50%;
-    width: 2px;
-    height: 24px;
-    background-color: #fff;
+    width: 22px;
+    height: 22px;
     transform: translate(-50%, -50%);
     z-index: 10;
     cursor: pointer;
     transition: all 0.2s ease;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    
+    /* CSS magic to draw a perfect star */
+    background-color: var(--gold);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
 }
+
+/* Optional: Different colors for different event types */
+.event-birth { background-color: #4ade80; }
+.event-death { background-color: #f87171; }
+.event-battle { background-color: #fca5a5; }
+.event-miracle { background-color: #60a5fa; }
 
 .event-marker:hover {
-    transform: translate(-50%, -50%) scaleY(1.5) scaleX(2);
+    transform: translate(-50%, -50%) scale(1.4);
     z-index: 20;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    /* Simulates a glow effect on the star */
+    filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.8)); 
 }
 
+/* =========================================
+   EVENTS: HOVER LABELS
+   ========================================= */
 .event-label {
     position: absolute;
     left: 50%;
+    bottom: 20px; /* Positions it above the star */
     transform: translateX(-50%);
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.95);
-    white-space: nowrap;
-    cursor: pointer;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
-    transition: all 0.2s;
-    text-align: center;
-    z-index: 15;
-    background: rgba(0, 0, 0, 0.6);
-    padding: 2px 6px;
-    border-radius: 4px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.event-marker:hover .event-label {
+    font-size: 0.8rem;
     color: #fff;
+    white-space: nowrap;
     background: rgba(0, 0, 0, 0.9);
-    border-color: var(--gold);
+    padding: 6px 12px;
+    border-radius: 4px;
+    border: 1px solid var(--gold);
+    
+    /* Hidden by default */
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease;
     z-index: 30;
+    pointer-events: none; /* So the mouse doesn't get confused */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
 }
 
+/* Reveal the text only on hover */
+.event-marker:hover .event-label {
+    opacity: 1;
+    visibility: visible;
+    bottom: 28px; /* Slides up slightly for a cool animation */
+}
+
+/* Remove leader lines since labels now hover directly over stars */
 .leader-line {
-    position: absolute;
-    left: 50%;
-    width: 1px;
-    background: rgba(255, 255, 255, 0.3);
-    transform: translateX(-50%);
-    pointer-events: none;
-    z-index: 5;
+    display: none;
 }
 
-.event-birth {
-    background-color: #27ae60;
-}
-
-.event-death {
-    background-color: #c0392b;
-}
-
- 
+/* =========================================
+   MODAL & FLOATING CONTROLS
+   ========================================= */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -411,12 +436,23 @@ main {
 .modal-content {
     background: #1a1a2e;
     border: 1px solid var(--gold);
-    border-radius: 4px;
+    border-radius: 8px;
     width: 90%;
     max-width: 500px;
     padding: 2rem;
     position: relative;
-    margin-bottom: 1rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
 }
 
 .modal-header h2 {
@@ -425,309 +461,21 @@ main {
     margin-bottom: 0.5rem;
 }
 
-.modal-date {
-    color: var(--secondary-color);
-    font-size: 0.9rem;
-    font-style: italic;
-}
-
-.modal-body {
-    line-height: 1.6;
-    color: #e0e0e0;
-}
-
-.modal-source {
-    margin-top: 1.5rem;
-    padding-top: 1rem;
-    border-top: 1px dashed rgba(255, 255, 255, 0.1);
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.6);
-}
-
-.modal-source-link {
-    color: var(--teal);
-    text-decoration: underline;
-    transition: color 0.2s;
-}
-
-.modal-source-link:hover {
-    color: var(--gold);
-}
-
-.modal-source strong {
-    color: var(--teal);
-}
-
-footer {
-    text-align: center;
-    padding: 2rem;
-    color: rgba(255, 255, 255, 0.4);
-    font-size: 0.9rem;
-}
-
- 
-
-.home-body {
-    overflow-y: auto;
-    overflow-x: hidden;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 5vh 2rem;
-    gap: 8rem;
-}
-
-.home-content {
-    text-align: center;
-    z-index: 10;
-    position: relative;
-    animation: fadeInUp 1s ease-out;
-}
-
-.glow-orb {
-    position: absolute;
-    top: -100px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, rgba(212, 175, 55, 0.3) 0%, transparent 70%);
-    border-radius: 50%;
-    filter: blur(60px);
-    animation: pulse 4s ease-in-out infinite;
-    pointer-events: none;
-}
-
-@keyframes pulse {
-
-    0%,
-    100% {
-        opacity: 0.5;
-        transform: translateX(-50%) scale(1);
-    }
-
-    50% {
-        opacity: 0.8;
-        transform: translateX(-50%) scale(1.1);
-    }
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.main-title {
-    font-family: var(--font-heading);
-    font-size: clamp(3rem, 8vw, 5rem);
-    color: #fff;
-    margin-bottom: 1rem;
-    letter-spacing: 3px;
-    text-shadow: 0 0 20px rgba(212, 175, 55, 0.5), 0 0 40px rgba(212, 175, 55, 0.3);
-    background: linear-gradient(to bottom, #fff, var(--gold));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.subtitle {
-    font-family: var(--font-arabic);
-    font-size: clamp(1.2rem, 3vw, 1.8rem);
-    color: var(--secondary-color);
-    margin-bottom: 1.5rem;
-    letter-spacing: 1px;
-    font-style: italic;
-}
-
-.description {
-    font-family: var(--font-body);
-    font-size: clamp(0.9rem, 2vw, 1.1rem);
-    color: rgba(255, 255, 255, 0.7);
-    max-width: 600px;
-    margin: 0 auto 3rem;
-    line-height: 1.8;
-}
-
-.enter-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 1rem 2.5rem;
-    background: linear-gradient(135deg, var(--gold) 0%, #b8860b 100%);
-    color: #000;
-    text-decoration: none;
-    font-family: var(--font-heading);
-    font-size: 1.1rem;
-    font-weight: 600;
-    border-radius: 8px;
-    border: 2px solid transparent;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
-}
-
-.enter-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    transition: left 0.5s;
-}
-
-.enter-btn:hover::before {
-    left: 100%;
-}
-
-.enter-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 30px rgba(212, 175, 55, 0.6);
-    border-color: #fff;
-}
-
-.btn-icon {
-    transition: transform 0.3s ease;
-}
-
-.enter-btn:hover .btn-icon {
-    transform: translateX(5px);
-}
-
-.info-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    max-width: 1000px;
-    width: 90%;
-    animation: fadeInUp 1s ease-out 0.3s backwards;
-}
-
-.info-card {
-    background: linear-gradient(0deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 4px;
-    padding: 1.75rem;
-    text-align: left;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-    
-}
-
-.info-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.35);
-    border-color: rgba(255,255,255,0.12);
-}
-
-.card-top {
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
-    margin-bottom: 0.5rem;
-}
-
-.card-subtitle {
-    color: rgba(255,255,255,0.65);
-    font-size: 0.85rem;
-    margin: 0 0 0 6px;
-    font-style: italic;
-}
-
-.card-body {
-    color: rgba(255,255,255,0.78);
-    line-height: 1.6;
-    margin-top: 0.5rem;
-}
-
-.info-card h3 {
-    font-family: var(--font-heading);
-    color: var(--gold);
-    font-size: 1.3rem;
-    margin-bottom: 0.8rem;
-    letter-spacing: 1px;
-}
-
-.info-card p {
-    color: rgba(255, 255, 255, 0.7);
-    line-height: 1.6;
-    font-size: 0.95rem;
-}
-
-.quote-section {
-    max-width: 800px;
-    width: 90%;
-    animation: fadeInUp 1s ease-out 0.6s backwards;
-}
-
-.quote-container {
-    background: rgba(0, 0, 0, 0.4);
-    border-left: 4px solid var(--gold);
-    border-radius: 4px;
-    padding: 2.5rem;
-    position: relative;
-    backdrop-filter: blur(10px);
-}
-
-.quote-container::before {
-    content: '"';
-    position: absolute;
-    top: -20px;
-    left: 20px;
-    font-size: 6rem;
-    color: var(--gold);
-    opacity: 0.3;
-    font-family: Georgia, serif;
-    line-height: 1;
-}
-
-.quote-text {
-    font-family: var(--font-arabic);
-    font-size: clamp(1rem, 2.5vw, 1.3rem);
-    color: rgba(255, 255, 255, 0.9);
-    line-height: 1.8;
-    font-style: italic;
-    margin-bottom: 1rem;
-}
-
-.quote-attribution {
-    font-family: var(--font-heading);
-    color: var(--secondary-color);
-    font-size: 1rem;
-    text-align: right;
-}
-
- 
 .floating-controls {
     position: fixed;
     bottom: 30px;
     right: 30px;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.85);
     backdrop-filter: blur(10px);
     padding: 15px;
-    border-radius: 4px;
+    border-radius: 8px;
     border: 1px solid var(--gold);
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
     z-index: 1000;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    width: 200px;
-    transition: opacity 0.3s;
-}
-
-.floating-controls:hover {
-    opacity: 1;
+    width: 220px;
 }
 
 .floating-controls .control-group {
@@ -755,10 +503,9 @@ footer {
     padding: 8px;
     border-radius: 4px;
     cursor: pointer;
-    transition: all 0.2s;
     font-family: var(--font-heading);
-    font-size: 0.9rem;
     width: 100%;
+    transition: all 0.2s;
 }
 
 .floating-controls button:hover {
@@ -766,23 +513,95 @@ footer {
     color: var(--bg-color);
 }
 
-@media (max-width: 768px) {
-    .home-body {
-        gap: 5rem;
-        padding-top: 5vh;
+/* =========================================
+   MOBILE RESPONSIVENESS
+   ========================================= */
+@media (max-width: 900px) {
+    header {
+        flex-direction: column;
+        padding: 1rem;
     }
-
-    .info-cards {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
+    
+    .timeline-label {
+        width: 140px;
+        flex-direction: column-reverse;
+        justify-content: center;
+        text-align: center;
+        gap: 5px;
+        font-size: 0.8rem;
+        padding: 5px;
+        white-space: normal;
     }
-
-    .quote-container {
-        padding: 1.5rem;
+    
+    .timeline-person-image {
+        width: 35px;
+        height: 35px;
     }
-
-    .glow-orb {
-        width: 200px;
-        height: 200px;
+    
+    .timeline-bar-container {
+        left: 150px;
+    }
+    
+    .timeline-row::before {
+        left: 150px;
+    }
+    
+    .timeline-container {
+        -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    }
+    
+    .floating-controls {
+        bottom: 10px;
+        right: 10px;
+        width: 180px;
+        padding: 10px;
     }
 }
+/* =========================================
+   NEW: STYLES FOR IMAGE-BASED BANNERS
+   ========================================= */
+
+:root {
+    /* Increase the height of all timeline bars to fit a large image */
+    --timeline-bar-height: 80px; 
+    /* Reduce the gap to remove dead space */
+    --timeline-gap: 50px; 
+}
+
+/* Modify the existing timeline bar rules to allow images */
+.timeline-bar {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    border-radius: 8px; /* Give it soft corners */
+    z-index: 1;
+    /* Important: Disable solid backgrounds previously set on this rule */
+    background: transparent !important; 
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Style the actual wide image inside the bar */
+.timeline-bar-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Crucial for zoom! Prevents stretching. */
+    border-radius: 8px;
+    pointer-events: none; /* Mouse can still click through to stars */
+    
+    /* Apply the special left/right faded edges directly to the image */
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+/* Ensure stars stack *on top* of the new image strip */
+.event-marker {
+    z-index: 10;
+}
+
+/* Optional: Different colors for different event types */
+.event-birth { background-color: #4ade80; }
+.event-death { background-color: #f87171; }
+.event-battle { background-color: #fca5a5; }
+.event-miracle { background-color: #60a5fa; }
